@@ -1,11 +1,14 @@
 package co.bildit.abdel.weatherapp
 
+import android.R
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import co.bildit.abdel.weatherapp.databinding.ActivityTemperatureListBinding
 import androidx.recyclerview.widget.LinearLayoutManager
+import co.bildit.abdel.weatherapp.adapters.WeatherAdapter
 import co.bildit.abdel.weatherapp.models.WeatherForecast
 import com.android.volley.AuthFailureError
 import com.android.volley.Request
@@ -14,10 +17,13 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.Gson
-import org.json.JSONArray
 import org.json.JSONObject
+import androidx.annotation.NonNull
 
-class TemperatureList : AppCompatActivity() {
+
+
+
+class TemperatureListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTemperatureListBinding
     private lateinit var adapter: WeatherAdapter
 
@@ -40,7 +46,7 @@ class TemperatureList : AppCompatActivity() {
         }
 
         val data: ArrayList<WeatherForecast> = ArrayList<WeatherForecast>()
-        adapter = WeatherAdapter(data)
+        adapter = WeatherAdapter(data, this)
 
         binding.recyclerView.setAdapter(adapter)
         binding.recyclerView.setLayoutManager(LinearLayoutManager(this))
@@ -82,5 +88,14 @@ class TemperatureList : AppCompatActivity() {
 
         requestQueue?.add(stringRequest)
 
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

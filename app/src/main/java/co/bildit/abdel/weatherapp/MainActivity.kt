@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             if (city.isEmpty()) {
                 Toast.makeText(this@MainActivity, "Please enter a City", Toast.LENGTH_SHORT).show()
             } else {
-                val intent = Intent(this@MainActivity, TemperatureList::class.java)
+                val intent = Intent(this@MainActivity, TemperatureListActivity::class.java)
                 val bundle = Bundle()
                 bundle.putString("city", city)
                 intent.putExtras(bundle)
